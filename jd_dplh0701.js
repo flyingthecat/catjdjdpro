@@ -67,13 +67,7 @@ $.bwater = false;
       await $.wait(parseInt(Math.random() * 1000 + 1500, 10));
       if ($.outFlag) break;
     }
-  }
-  if ($.outFlag) {
-    let _0x29ebd6 = "此ip已被限制，请过10分钟后再执行脚本";
-    $.msg($.name, "", "" + _0x29ebd6);
-    if ($.isNode()) await _0x58ca13.sendNotify("" + $.name, "" + _0x29ebd6);
-  }
-  if($.index % 7 === 0){
+	if($.index % 7 === 0){
     console.log("为了帝国第"+$.index+"个号休息10分钟-->"+new Date());
     await $.wait(600000); 
   }else{
@@ -81,6 +75,14 @@ $.bwater = false;
     console.log("为了可持续发展随机休息"+n);
     await $.wait(n); 
   }
+  }
+  if ($.outFlag) {
+    let _0x29ebd6 = "此ip已被限制，请过10分钟后再执行脚本";
+    $.msg($.name, "", "" + _0x29ebd6);
+    if ($.isNode()) await _0x58ca13.sendNotify("" + $.name, "" + _0x29ebd6);
+  }
+  
+  
 })().catch(_0x3a0bff => $.logErr(_0x3a0bff)).finally(() => $.done());
 async function _0x5cbac6() {
   try {
