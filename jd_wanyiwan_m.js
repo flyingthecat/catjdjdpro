@@ -59,7 +59,7 @@ $.apiTokenObj = {};
   
   console.log("只做助力");
   
-  Date.now() > bdy_0xd600b7 ? console.log("\n\n已设置" + bdy_0x10ec9c + "点后关闭助力") : $.helpId.length > 1 && (console.log("\n\n开始内部助力..."), await bdy_0x1ae56f());
+  await bdy_0x1ae56f();
 })().catch(_0x256baf => {
   return $.logErr(_0x256baf);
 }).finally(() => {
