@@ -952,7 +952,7 @@ Recombin_FarmCodes() {
     if [[ $local_scr == *"farm_help_new"* ]]; then
         local today=$(( ( $(date +%-d) - 1) % 6 ))
         echo "今天$(date +%-d)号，第$((today + 1))次循环开始"
-        echo "NEWFRUITCODES：$NEWFRUITCODES"
+        #echo "NEWFRUITCODES：$NEWFRUITCODES"
         if [[ -n "$NEWFRUITCODES" ]]; then
             # 将变量 NEWFRUITCODES 分割为数组
             local FRUITCODES=($(eval echo "\$NEWFRUITCODES" | perl -pe "{s|&| |g}"))
@@ -970,7 +970,7 @@ Recombin_FarmCodes() {
                     fi
                 fi
             done
-            echo "新的code:$help_code"
+            #echo "新的code:$help_code"
             export NEWFRUITCODES=$help_code
         fi
     fi
