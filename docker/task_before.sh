@@ -947,6 +947,35 @@ JS_Deps_Replace() {
     fi
 }
 
+## 重组 助力码
+Recombin_FarmCodes() {
+    if [[ $local_scr == *"farm_help_new"* ]]; then
+        local today=$(( ( $(date +%-d) - 1) % 6 ))
+        echo "今天$(date +%-d)号，第$((today + 1))次循环开始"
+        echo "NEWFRUITCODES：$NEWFRUITCODES"
+        if [[ -n "$NEWFRUITCODES" ]]; then
+            # 将变量 NEWFRUITCODES 分割为数组
+            local FRUITCODES=($(eval echo "\$NEWFRUITCODES" | perl -pe "{s|&| |g}"))
+            
+            # 重新组织
+            local help_code=""
+            for i in "${!FRUITCODES[@]}"; do
+                if [[ -z "$help_code" ]]; then
+                    help_code="${FRUITCODES[i]}"
+                else
+                    if [[ $i -eq $today ]]; then
+                        help_code="${FRUITCODES[i]}&$help_code"
+                    else
+                        help_code="$help_code&${FRUITCODES[i]}"
+                    fi
+                fi
+            done
+            echo "新的code:$help_code"
+            export NEWFRUITCODES=$help_code
+        fi
+    fi
+}
+
 [[ -f $dir_scripts/CK_WxPusherUid.json && $local_scr_dir && $local_scr_dir != $dir_scripts ]] && cp -rf $dir_scripts/CK_WxPusherUid.json $local_scr_dir/CK_WxPusherUid.json 
 #source $file_env
 gen_pt_pin_array
@@ -957,3 +986,4 @@ if [[ $* != *desi* && $* != *conc* ]];then
 Recombin_CK
 fi
 combine_only
+Recombin_FarmCodes
