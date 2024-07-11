@@ -109,7 +109,7 @@ async function bdy_0x1378f9() {
           console.log("错误了，403");
           break;
         }
-        await $.wait(10000);
+        await $.wait(13000);
       }
     }
     await bdy_0x358796();
@@ -129,7 +129,7 @@ async function bdy_0x1378f9() {
           console.log("错误了！");
           break;
         }
-        await $.wait(3000);
+        await $.wait(10000);
       }
       _0x2c8572 && console.log("天天抽奖奖励：" + _0x2c8572.substr(0, _0x2c8572.length - 1) + "\n");
     } else {
