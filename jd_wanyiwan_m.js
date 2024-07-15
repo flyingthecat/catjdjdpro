@@ -9,7 +9,6 @@ const bdy_0x11a0bb = $.isNode() ? require("./jdCookie.js") : "",
   bdy_0x3f7259 = require("./function/dylib.js"),
   bdy_0x139bf1 = require("./USER_AGENTS"),
   bdy_0x4af7aa = process.env.WYW_DBNUM ? process.env.WYW_DBNUM : "100";
-  helpCode = process.env.WYW_HELPCODE;
 let bdy_0x3bb0f3 = "",
   bdy_0x497e2a = {};
 if (process.env.DY_PROXY) {
@@ -56,20 +55,58 @@ $.apiTokenObj = {};
   console.log("当前版本：20240706");
   console.log("问题建议：https://t.me/dylan_jdpro");
   console.log("环境变量：\n    WYW_HELPTM='15' 几点后关闭助力");
-  
-  console.log("只做助力");
-  
-  await bdy_0x1ae56f();
+  console.log("只做任务和助力");
+  for (let _0x35fde2 = 0; _0x35fde2 < bdy_0x26fec9.length; _0x35fde2++) {
+    $.UA = bdy_0x139bf1.UARAM ? bdy_0x139bf1.UARAM("", bdy_0x55967f) : bdy_0x139bf1.USER_AGENT;
+    bdy_0x55967f = bdy_0x3f7259.buildck(bdy_0x26fec9[_0x35fde2]);
+    if (bdy_0x55967f) {
+      $.UserName = decodeURIComponent(bdy_0x55967f.match(/pt_pin=([^; ]+)(?=;?)/) && bdy_0x55967f.match(/pt_pin=([^; ]+)(?=;?)/)[1]);
+      $.index = _0x35fde2 + 1;
+      $.hotFlag = false;
+      $.nickName = "";
+      $.isLogin = true;
+      $.outFlag = false;
+      $.isban = false;
+      $.hasRisk = false;
+      bdy_0x3bb0f3 = bdy_0x4af7aa;
+      bdy_0x18f932 = 0;
+      console.log("\n******开始【京东账号" + $.index + "】" + ($.nickName || $.UserName) + "*********\n");
+      let _0x1793de = await bdy_0x3f7259.jddToken($.UA);
+      if (_0x1793de) {
+        $.apitoken = _0x1793de.token;
+      }
+      $.apiTokenObj[$.UserName] = $.apitoken;
+      $.UUID = bdy_0x3f7259.UUID("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+      if (!$.isLogin) {
+        const _0x1143ef = {
+          "open-url": "https://bean.m.jd.com/bean/signIndex.action"
+        };
+        $.msg($.name, "【提示】cookie已失效", "京东账号" + $.index + " " + ($.nickName || $.UserName) + "\n请重新登录获取\nhttps://bean.m.jd.com/bean/signIndex.action", _0x1143ef);
+        $.isNode() && (await bdy_0xea0dc4.sendNotify($.name + "cookie已失效 - " + $.UserName, "京东账号" + $.index + " " + $.UserName + "\n请重新登录获取cookie"));
+        continue;
+      }
+      $.index != 1 && bdy_0x497e2a.swip && (await bdy_0x497e2a.swip());
+      await bdy_0x201cb4();
+      if ($.outFlag) {
+        break;
+      }
+      if($.index % 10 === 0){
+        console.log("为了帝国第"+$.index+"个号休息6分钟-->"+new Date());
+        await $.wait(360000);  
+      }else{
+        let n = parseInt(Math.random() * 1000 + 25000, 10);
+        console.log("为了可持续发展随机休息"+n);
+        await $.wait(n); 
+      }
+    }
+  }
+  Date.now() > bdy_0xd600b7 ? console.log("\n\n已设置" + bdy_0x10ec9c + "点后关闭助力") : $.helpId.length > 1 && (console.log("\n\n开始内部助力..."), await bdy_0x1ae56f());
 })().catch(_0x256baf => {
   return $.logErr(_0x256baf);
 }).finally(() => {
   return $.done();
 });
 async function bdy_0x1ae56f() {
-  if(helpCode){
-    $.helpId = helpCode.split('&')
-  }
-  console.log("助力码 --> " + $.helpId);
   for (let _0x1aec57 = 0; _0x1aec57 < bdy_0x26fec9.length; _0x1aec57++) {
     $.UA = bdy_0x139bf1.UARAM ? bdy_0x139bf1.UARAM("", bdy_0x55967f) : bdy_0x139bf1.USER_AGENT;
     bdy_0x55967f = bdy_0x3f7259.buildck(bdy_0x26fec9[_0x1aec57]);
@@ -93,7 +130,7 @@ async function bdy_0x1ae56f() {
         }
         let n = parseInt(Math.random() * 1000 + 10000, 10);
         console.log("为了多助力随机休息"+n);
-        await $.wait(n); 
+        await $.wait(n);
       }
       if ($.outFlag) {
         break;
@@ -149,9 +186,20 @@ async function bdy_0x201cb4() {
         }
       }
       if (_0x289cb1.title.includes("邀请")) {
-        console.log("富强码-->:" + _0x289cb1.taskDetail[0].itemId);
         $.helpId.push(_0x289cb1.taskDetail[0].itemId);
         continue;
+      }
+      console.log("去做 " + _0x289cb1.title);
+      for (let _0x1baf38 = 0; _0x1baf38 < _0x8d2831; _0x1baf38++) {
+        _0x289cb1.taskDetail && ($.itemId = _0x289cb1.taskDetail[_0x1baf38].itemId);
+        await bdy_0x265d31("startTask");
+        if (_0x289cb1.limitTime != 0) {
+          await $.wait(_0x289cb1.limitTime * 1000);
+          await bdy_0x265d31("endTask");
+        }
+        await $.wait(parseInt(Math.random() * 500 + 1000, 10));
+        await bdy_0x265d31("award");
+        await $.wait(parseInt(Math.random() * 1000 + 1000, 10));
       }
       await $.wait(parseInt(Math.random() * 500 + 1500, 10));
     }
