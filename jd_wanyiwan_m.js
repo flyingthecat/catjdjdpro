@@ -9,6 +9,7 @@ const bdy_0x11a0bb = $.isNode() ? require("./jdCookie.js") : "",
   bdy_0x3f7259 = require("./function/dylib.js"),
   bdy_0x139bf1 = require("./USER_AGENTS"),
   bdy_0x4af7aa = process.env.WYW_DBNUM ? process.env.WYW_DBNUM : "100";
+  helpCode = process.env.WYW_HELPCODE;
 let bdy_0x3bb0f3 = "",
   bdy_0x497e2a = {};
 if (process.env.DY_PROXY) {
@@ -107,6 +108,10 @@ $.apiTokenObj = {};
   return $.done();
 });
 async function bdy_0x1ae56f() {
+	if(helpCode){
+		$.helpId = helpCode.split('&')
+	}
+	console.log("助力码 --> " + $.helpId);
   for (let _0x1aec57 = 0; _0x1aec57 < bdy_0x26fec9.length; _0x1aec57++) {
     $.UA = bdy_0x139bf1.UARAM ? bdy_0x139bf1.UARAM("", bdy_0x55967f) : bdy_0x139bf1.USER_AGENT;
     bdy_0x55967f = bdy_0x3f7259.buildck(bdy_0x26fec9[_0x1aec57]);
@@ -186,6 +191,7 @@ async function bdy_0x201cb4() {
         }
       }
       if (_0x289cb1.title.includes("邀请")) {
+		  console.log("富强码-->:" + _0x289cb1.taskDetail[0].itemId);
         $.helpId.push(_0x289cb1.taskDetail[0].itemId);
         continue;
       }
