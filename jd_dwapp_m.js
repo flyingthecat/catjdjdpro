@@ -59,7 +59,7 @@ if ($.isNode()) {
         }
         $.UUID = _0xbeb38d("xxxxxxxxxxxxxxxx");
         await _0x5a7cf6();
-        if($.index % 10 === 0){
+        if($.index % 5 === 0){
           console.log("为了帝国第"+$.index+"个号休息10分钟-->"+new Date());
           await $.wait(600000); 
         }else{
