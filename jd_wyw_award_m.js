@@ -52,13 +52,12 @@ let _0x1de787 = process.env.WYW_DHID2 || "",
   _0x2d0f60 = _0x3da8bb[0];
   $.UserName = decodeURIComponent(_0x2d0f60.match(/pt_pin=([^; ]+)(?=;?)/) && _0x2d0f60.match(/pt_pin=([^; ]+)(?=;?)/)[1]);
   _0x4be99a();
-  // await _0x1f5fa3(_0x2d0f60, 1, $.UserName, $.UA, "wanyiwan_exchange_page");
+  await _0x1f5fa3(_0x2d0f60, 1, $.UserName, $.UA, "wanyiwan_exchange_page");
   _0x1de787 == "" && (console.log("\n请设置兑换ID"), process.exit());
-  /*_0x1de787.split("&").forEach(_0x292bd6 => {
+  _0x1de787.split("&").forEach(_0x292bd6 => {
     let _0x215e80 = $.moreExchanges.find(_0x284ce3 => _0x284ce3.assignmentId == _0x292bd6);
     _0x215e80 !== undefined && _0x57141f.push(_0x215e80);
-  }); */
-  _0x57141f.push(_0x1de787)
+  });
   _0x57141f.length === 0 && (console.log("没有匹配到兑换目标，请检查设置的ID是否正确！"), process.exit());
   let _0xde197c = await _0x1e873a.getZd("h");
   if (_0xde197c > 30000) _0xde197c = 0;
