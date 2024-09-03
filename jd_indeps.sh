@@ -39,7 +39,7 @@ echo -e "开始安装............\n"
 #apk add g++ make pixman-dev pango-dev cairo-dev pkgconf --no-cache
 #apk add g++ make --no-cache
 pnpm config set registry https://registry.npmmirror.com
-# pnpm install -g
+pnpm install -g
 pnpm i -g ds@2.0.2
 pnpm i -g png-js@1.0.0
 pnpm i -g date-fns@3.6.0
@@ -55,8 +55,8 @@ pnpm i -g moment@2.30.1
 pnpm i -g cheerio@1.0.0
 # pnpm install -g tough-cookie@4.1.4
 pnpm i -g https-proxy-agent@7.0.5
-pip3 i -i https://pypi.tuna.tsinghua.edu.cn/simple/ jieba
-pip3 i -i https://pypi.tuna.tsinghua.edu.cn/simple/ requests
+pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple/ jieba
+pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple/ requests
 rm -rf /usr/local/pnpm-global/5/node_modules/.pnpm/canvas*
 rm -rf /root/.local/share/pnpm/global/5/.pnpm/canvas*
 echo -e "\n所需依赖安装完成，请检查有没有报错，可尝试再次运行"
