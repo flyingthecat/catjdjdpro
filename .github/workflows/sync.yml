@@ -1,0 +1,18 @@
+# .github/workflows/sync.yml
+name: Sync Fork
+
+on:
+  workflow_dispatch: # workflow_dispatch手动触发 push push时触发
+  schedule:
+    - cron: '35 8-23/3,1 * * *' # 对应北京时间35 8-23/3,1 * * *
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: tgymnich/fork-sync@v2.0.10
+        with:
+          token: ${{ secrets.GITHUB_TOKEN  }}
+          owner: 6dylan6 # fork 的上游仓库 user
+          repo: jdpro
+          head: main # fork 的上游仓库 branch
+          base: main # 本地仓库 branch
