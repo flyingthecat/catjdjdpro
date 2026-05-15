@@ -1,0 +1,87 @@
+name: GitHub Actions Auto Cleanup
+
+on:
+  schedule:
+    - cron: "0 3 * * *"   # 每天凌晨 3 点（UTC）
+  workflow_dispatch:
+
+permissions:
+  actions: write
+  contents: read
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Delete old workflow runs
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+
+            const runs = await github.paginate(
+              github.rest.actions.listWorkflowRunsForRepo,
+              {
+                owner,
+                repo,
+                per_page: 100,
+              }
+            );
+
+            const now = Date.now();
+            const maxAge = 7 * 24 * 60 * 60 * 1000; // 7天
+
+            for (const run of runs) {
+              const created = new Date(run.created_at).getTime();
+
+              if (now - created > maxAge) {
+                console.log(`Deleting run ${run.id}`);
+
+                await github.rest.actions.deleteWorkflowRun({
+                  owner,
+                  repo,
+                  run_id: run.id,
+                });
+              }
+            }
+
+      - name: Delete old artifacts
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+
+            const artifacts = await github.paginate(
+              github.rest.actions.listArtifactsForRepo,
+              { owner, repo, per_page: 100 }
+            );
+
+            const now = Date.now();
+            const maxAge = 7 * 24 * 60 * 60 * 1000;
+
+            for (const art of artifacts) {
+              const created = new Date(art.created_at).getTime();
+
+              if (now - created > maxAge) {
+                console.log(`Deleting artifact ${art.id}`);
+
+                await github.rest.actions.deleteArtifact({
+                  owner,
+                  repo,
+                  artifact_id: art.id,
+                });
+              }
+            }
+
+      - name: Clean up cache
+        run: |
+          gh cache list --limit 1000 | awk '{print $1}' | while read id
+          do
+            echo "Deleting cache $id"
+            gh cache delete $id
+          done
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
